@@ -27,6 +27,7 @@ jobs:
         with:
           node-version: 18
       - run: |
+          rm package-lock.json
           yarn
           yarn run all
   test:
@@ -37,4 +38,4 @@ jobs:
       - uses: ./
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          expire-in: '30minutes'
+          expire-in: '2minutes'
