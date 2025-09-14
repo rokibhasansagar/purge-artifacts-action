@@ -28,8 +28,9 @@ jobs:
           node-version: 20
       - run: |
           rm package-lock.json
-          # export NODE_OPTIONS=--openssl-legacy-provider
+          export NODE_OPTIONS=--openssl-legacy-provider
           yarn
+          git diff
           # yarn upgrade
           yarn run all
   test:
