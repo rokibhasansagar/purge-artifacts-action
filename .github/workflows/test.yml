@@ -29,10 +29,18 @@ jobs:
       - run: |
           rm package-lock.json
           export NODE_OPTIONS=--openssl-legacy-provider
-          yarn
-          git diff
-          # yarn upgrade
-          yarn run all
+          (
+            set -x
+            yarn
+            # yarn run all
+            yarn run build
+            yarn run format
+            yarn run lint
+            yarn run pack
+            yarn run test
+            set +x
+          )
+          git status
   test:
     runs-on: ubuntu-latest
     needs: artifact
