@@ -63,7 +63,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           expire-in: '1minutes'
       - run: |
-          echo data
-          echo ${{ steps.clean.outputs.deleted-artifacts }} >/tmp/data.json
-          jq '.' < /tmp/data.json
-          echo
+          echo ${{ steps.clean.outputs.deleted-artifacts }} | tee /tmp/data.json
