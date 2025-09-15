@@ -65,5 +65,5 @@ jobs:
       - run: |
           echo data
           echo ${{ steps.clean.outputs.deleted-artifacts }} >/tmp/data.json
-          jq < /tmp/data.json
+          jq '.' < /tmp/data.json
           echo
