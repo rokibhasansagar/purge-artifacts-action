@@ -8,7 +8,8 @@
     "format": "prettier --write **/*.{ts,yml,json}",
     "format-check": "prettier --check **/*.{ts,yml,json}",
     "lint": "eslint src/**/*.ts",
-    "pack": "ncc build --minify",
+    "pack": "ncc build",
+    "pack-min": "ncc build --minify",
     "test": "jest",
     "test-watch": "jest --watch",
     "all": "yarn run build && yarn run format && yarn run lint && yarn run pack && yarn run test"
