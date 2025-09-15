@@ -36,12 +36,16 @@ jobs:
             # yarn run all
             yarn run build
             yarn run format
-            yarn run lint || echo "[!] Lint Failed"
+            # yarn run lint || echo "[!] Lint Failed"
             yarn run pack
-            yarn run test || echo "[!] Test Failed"
+            # yarn run test || echo "[!] Test Failed"
             set +x
           )
+          echo -e "\n\n"
           git status
+          echo -e "\n\n"
+          git diff -- dist/
+          
   test:
     runs-on: ubuntu-latest
     needs: artifact
