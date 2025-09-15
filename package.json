@@ -1,6 +1,6 @@
 {
   "name": "purge-artifacts-action",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Github action for automatic deletion of artifacts",
   "main": "lib/main.js",
   "scripts": {
@@ -9,6 +9,7 @@
     "format-check": "prettier --check **/*.{ts,yml,json}",
     "lint": "eslint src/**/*.ts",
     "pack": "ncc build",
+    "pack-min": "ncc build --minify",
     "test": "jest",
     "test-watch": "jest --watch",
     "all": "yarn run build && yarn run format && yarn run lint && yarn run pack && yarn run test"
@@ -25,7 +26,7 @@
   "author": "Pavel Kolář",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.10.0",
+    "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.1",
     "@octokit/core": "^7.0.3",
     "@octokit/plugin-rest-endpoint-methods": "^3.2.0",
@@ -33,20 +34,20 @@
     "parse-duration": "^2.1.3"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.23",
-    "@types/node": "^16.3.1",
-    "@typescript-eslint/eslint-plugin": "^5.57.0",
-    "@typescript-eslint/parser": "^5.57.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^16.11.7",
+    "@typescript-eslint/eslint-plugin": "^8.43.0",
+    "@typescript-eslint/parser": "^8.43.0",
     "@vercel/ncc": "^0.38.3",
-    "eslint": "^8.34.0",
-    "eslint-plugin-github": "^4.7.0",
-    "eslint-plugin-jest": "^22.21.0",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint": "^8.57.1",
+    "eslint-plugin-github": "^5.1.8",
+    "eslint-plugin-jest": "^29.0.1",
+    "eslint-plugin-prettier": "^5.5.4",
     "jest": "^30.1.3",
     "jest-circus": "^30.1.3",
     "js-yaml": "^3.13.1",
-    "prettier": "^2.8.7",
+    "prettier": "^3.6.2",
     "ts-jest": "^29.4.1",
-    "typescript": "^4.9.5"
+    "typescript": "5.9.2"
   }
 }

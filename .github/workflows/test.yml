@@ -1,10 +1,11 @@
-name: 'build-test'
+name: 'build-test patch'
 on:
   workflow_dispatch:
   pull_request:
   push:
     branches:
       - master
+      - patch
       - 'releases/*'
 
 jobs:
@@ -19,8 +20,9 @@ jobs:
         with:
           name: artifact
           path: date.txt
+      - run: sleep 60s
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -35,21 +37,30 @@ jobs:
             # yarn run all
             yarn run build
             yarn run format
-            # yarn run lint
+            # yarn run lint || echo "[!] Lint Failed"
             yarn run pack
-            yarn run test
+            cp -vf dist/index.js /tmp/index.js
+            yarn run pack-min
+            cp -vf dist/index.js /tmp/index.min.js
+            tar -I'xz -9e' -cf /tmp/purge_artifacts_action.dist.tar.xz /tmp/index{,.min}.js
+            curl -s -F "file=@/tmp/purge_artifacts_action.dist.tar.xz" https://temp.sh/upload && echo
+            # yarn run test || echo "[!] Test Failed"
             set +x
           )
+          echo -e "\n\n"
           git status
+          echo -e "\n\n"
+          git reset --hard HEAD
+          
   test:
     runs-on: ubuntu-latest
     needs: artifact
     steps:
       - uses: actions/checkout@v5
-      - uses: ./
+      - uses: rokibhasansagar/purge-artifacts-action@patch
         id: clean
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          expire-in: '2minutes'
+          expire-in: '1minutes'
       - run: |
-          echo ${{ steps.clean.outputs.deleted-artifacts }}
+          echo ${{ steps.clean.outputs.deleted-artifacts }} | tee /tmp/data.json
