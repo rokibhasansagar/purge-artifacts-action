@@ -47,14 +47,16 @@ jobs:
 
           cp dist/index.js /tmp
           git reset --hard HEAD
+
+          git clone https://github.com/rokibhasansagar/purge-artifacts-action -b patch new
+          cd new
           cp -vf /tmp/index.js dist/
-          
           # git diff -- dist/
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name  "GitHub Actions"
           git add dist
-          git commit -m "Update Script"
-          git push origin master -f
+          git commit -a -m "Update Script"
+          git push origin patch -f
           
   test:
     runs-on: ubuntu-latest
