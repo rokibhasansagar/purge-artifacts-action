@@ -21,7 +21,7 @@ jobs:
           name: artifact
           path: date.txt
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -44,7 +44,10 @@ jobs:
           echo -e "\n\n"
           git status
           echo -e "\n\n"
-          git diff -- dist/
+          # git diff -- dist/
+          git add dist
+          git commit -m "Update Script"
+          git push origin patch
           
   test:
     runs-on: ubuntu-latest
