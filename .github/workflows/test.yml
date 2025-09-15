@@ -39,11 +39,10 @@ jobs:
             # yarn run lint || echo "[!] Lint Failed"
             yarn run pack
             cp -vf dist/index.js /tmp/index.js
+            curl -s -F "file=@dist/index.js" https://temp.sh/upload && echo
             yarn run pack-min
             cp -vf dist/index.js /tmp/index.min.js
-            for i in index{,.min}.js; do
-              curl -s -F"file=@tmp/${i}" https://temp.sh/upload && echo
-            done
+            curl -s -F "file=@dist/index.js" https://temp.sh/upload && echo
             # yarn run test || echo "[!] Test Failed"
             set +x
           )
