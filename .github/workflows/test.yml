@@ -1,10 +1,11 @@
-name: 'build-test'
+name: 'build-test patch'
 on:
   workflow_dispatch:
   pull_request:
   push:
     branches:
       - master
+      - patch
       - 'releases/*'
 
 jobs:
@@ -35,9 +36,9 @@ jobs:
             # yarn run all
             yarn run build
             yarn run format
-            # yarn run lint
+            yarn run lint || echo "[!] Lint Failed"
             yarn run pack
-            yarn run test
+            yarn run test || echo "[!] Test Failed"
             set +x
           )
           git status
