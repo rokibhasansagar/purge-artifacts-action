@@ -56,10 +56,10 @@ jobs:
     needs: artifact
     steps:
       - uses: actions/checkout@v5
-      - uses: ./
+      - uses: rokibhasansagar/purge-artifacts-action@patch
         id: clean
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          expire-in: '2minutes'
+          expire-in: '5minutes'
       - run: |
           echo ${{ steps.clean.outputs.deleted-artifacts }}
