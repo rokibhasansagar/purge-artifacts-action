@@ -63,5 +63,5 @@ jobs:
           expire-in: '5minutes'
       - run: |
           echo data
-          echo ${{ steps.clean.outputs.deleted-artifacts }} | jq
+          jq < $(echo ${{ steps.clean.outputs.deleted-artifacts }})
           echo
