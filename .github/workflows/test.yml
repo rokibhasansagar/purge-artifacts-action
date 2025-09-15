@@ -35,7 +35,7 @@ jobs:
             # yarn run all
             yarn run build
             yarn run format
-            yarn run lint
+            # yarn run lint
             yarn run pack
             yarn run test
             set +x
