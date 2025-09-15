@@ -57,10 +57,12 @@ jobs:
     needs: artifact
     steps:
       - uses: actions/checkout@v5
-      - uses: rokibhasansagar/purge-artifacts-action@patch
+      - uses: rokibhasansagar/purge-artifacts-action@master
         id: clean
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           expire-in: '1minutes'
       - run: |
           echo ${{ steps.clean.outputs.deleted-artifacts }} | tee /tmp/data.json
+          echo
+          jq '.[]' < /tmp/data.json || true
