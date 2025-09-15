@@ -46,10 +46,11 @@ jobs:
           echo -e "\n\n"
 
           cp dist/index.js /tmp
-          git reset --hard HEAD
+          # git reset --hard HEAD
 
-          git clone https://github.com/rokibhasansagar/purge-artifacts-action -b patch new
-          cd new
+          echo
+          git clone https://github.com/rokibhasansagar/purge-artifacts-action -b patch /tmp/new
+          cd /tmp/new
           cp -vf /tmp/index.js dist/
           # git diff -- dist/
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
