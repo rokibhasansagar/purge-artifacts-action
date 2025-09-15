@@ -44,12 +44,17 @@ jobs:
           echo -e "\n\n"
           git status
           echo -e "\n\n"
+
+          cp dist/index.js /tmp
+          git reset --hard HEAD
+          cp -vf /tmp/index.js dist/
+          
           # git diff -- dist/
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name  "GitHub Actions"
           git add dist
           git commit -m "Update Script"
-          git push origin patch
+          git push origin master -f
           
   test:
     runs-on: ubuntu-latest
