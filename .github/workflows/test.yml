@@ -20,6 +20,7 @@ jobs:
         with:
           name: artifact
           path: date.txt
+      - run: sleep 60s
   build:
     runs-on: ubuntu-latest
     steps:
@@ -60,8 +61,9 @@ jobs:
         id: clean
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          expire-in: '5minutes'
+          expire-in: '1minutes'
       - run: |
           echo data
-          jq < $(echo ${{ steps.clean.outputs.deleted-artifacts }})
+          echo ${{ steps.clean.outputs.deleted-artifacts }} >/tmp/data.json
+          jq < /tmp/data.json
           echo
