@@ -21,4 +21,4 @@ inputs:
     default: ''
 runs:
   using: 'node16'
-  main: 'dist/index.js'
+  main: 'dist/index.min.js'
