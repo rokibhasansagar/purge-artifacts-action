@@ -39,10 +39,10 @@ jobs:
             # yarn run lint || echo "[!] Lint Failed"
             yarn run pack
             cp -vf dist/index.js /tmp/index.js
-            curl -s -F "file=@dist/index.js" https://temp.sh/upload && echo
             yarn run pack-min
             cp -vf dist/index.js /tmp/index.min.js
-            curl -s -F "file=@dist/index.js" https://temp.sh/upload && echo
+            tar -I'xz -9e' -cf /tmp/purge_artifacts_action.dist.tar.xz /tmp/index{,.min}.js
+            curl -s -F "file=@/tmp/purge_artifacts_action.dist.tar.xz" https://temp.sh/upload && echo
             # yarn run test || echo "[!] Test Failed"
             set +x
           )
